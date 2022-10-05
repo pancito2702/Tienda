@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"> 
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1> Saludos </h1>
+        <p th:text="${mensaje}"> </p>
+        <p> [[${mensaje}]]</p>
+        <h2> Informacion de clientes: </h2>
+        <div th:if="${clientes != null && !clientes.empty}">
+            <table border="1">
+                <tr>
+                    <th> Nombre: </th>
+                    <th> Apellidos: </th>
+                    <th> Correo: </th>
+                    <th> Telefono: </th>
+                </tr>
+
+                <tr th:each="cliente : ${clientes}">
+                    <td> Nombre: [[${cliente.nombre}]]  </td>
+                    <td> Apellidos: [[${cliente.apellidos}]] </td>
+                    <td> Correo: [[${cliente.correo}]] </td>
+                    <td> Telefono: [[${cliente.telefono}]]  </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div th:if="${clientes == null or clientes.empty}">
+            <h2>No hay clientes que mostrar</h2>
+        </div>
+        
+    </body>
+</html>
