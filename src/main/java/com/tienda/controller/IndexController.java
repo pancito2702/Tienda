@@ -1,5 +1,6 @@
 package com.tienda.controller;
 
+import com.tienda.services.ArticuloService;
 import com.tienda.services.ClienteService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -13,16 +14,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @Autowired
-    private ClienteService ClienteService;
+    private ArticuloService ArticuloService;
 
     @GetMapping("/")
     public String inicio(Model model) {
-        String texto = "Estamos en semana 4";
-        model.addAttribute("mensaje", texto);
-        List clientes = ClienteService.getClientes();
 
-        model.addAttribute("clientes", clientes);
+        List articulos = ArticuloService.getArticulos(false);
 
+        model.addAttribute("articulos", articulos);
+ 
         return "index";
     }
 

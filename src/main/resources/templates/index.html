@@ -4,43 +4,37 @@
     <head>
         <title>TechShop</title>
         <meta charset="UTF-8">
+        <link href="/css/Menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"> </header>
-        <h1> Saludos </h1>
-        <p th:text="${mensaje}">  </p>
-        <p> [[${mensaje}]]</p>
-        <h2> Informacion de clientes: </h2>
-        <a th:href="@{/cliente/nuevo}"> Nuevo Cliente </a>
-        <div th:if="${clientes != null and !clientes.empty}">
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th> Nombre: </th>
-                        <th> Apellidos: </th>
-                        <th> Correo: </th>
-                        <th> Telefono: </th>
-                        <th> Eliminar: </th>
-                        <th> Modificar: </th>
-                    </tr>
-                </thead>
-                <tr th:each="cliente : ${clientes}">
-                    <td> Nombre: [[${cliente.nombre}]]  </td>
-                    <td> Apellidos: [[${cliente.apellidos}]] </td>
-                    <td> Correo: [[${cliente.correo}]] </td>
-                    <td> Telefono: [[${cliente.telefono}]]  </td>
-                    <td> <a th:href="@{/eliminarCliente/}+ ${cliente.idCliente}"> Eliminar </a> </td>
-                    <td> <a th:href="@{/modificarCliente/}+ ${cliente.idCliente}"> Modificar</a> </td>
-                </tr>
-            </table>
-        </div>
+        <div class="contenido">
 
-        <div th:if="${clientes == null or clientes.empty}">
-            <h2>No hay clientes que mostrar</h2>
+            <h2> Nuestros articulos: </h2>
+
+            <div th:if="${articulos != null and !articulos.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th> Descripcion </th>
+                            <th> Precio </th>
+
+                        </tr>
+                    </thead>
+                    <tr th:each="articulo : ${articulos}">
+                        <td> [[${articulo.descripcion}]]  </td>
+                        <td style="text-align: right">  
+                            [[${#numbers.formatDecimal(articulo.precio, 2, 3)}]] 
+                        </td>
+                        <td>  <a th:href="@{/carrito/agregar/} + ${articulo.idArticulo}"> Agregar Articulo  </a> </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${articulos == null or articulos.empty}">
+                <h2>No hay articulos que mostrar</h2>
+            </div>
         </div>
-        
         <footer th:replace="layout/plantilla :: footer"/>
-        
-        
     </body>
 </html>

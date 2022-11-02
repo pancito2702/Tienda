@@ -1,0 +1,25 @@
+
+package com.tienda.services;
+
+import com.tienda.domain.Articulo;
+import java.util.List;
+
+public interface ArticuloService {
+    /* Se definen los 4 metodos de un CRUD
+    Create Read Update Delete */
+    
+    // Retorna la lista de articulos
+    public List<Articulo> getArticulos(boolean activos);
+    
+    /* Dado un articulo.id se busca en 
+    la tabla y se retorna todo el objeto articulo */
+    public Articulo getArticulo(Articulo articulo);
+    
+    /* Si articulo.id tiene un valor se busca y se actualiza
+    Si el articulo.id no tiene un valor, se inserta el valor en la tabla */
+    public void save(Articulo articulo);
+    
+    // Elimina el registro que tiene el ide igual a articulo.id
+    public void delete(Articulo articulo);
+    
+}
