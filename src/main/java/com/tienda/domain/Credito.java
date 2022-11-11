@@ -1,5 +1,3 @@
-
-
 package com.tienda.domain;
 
 import java.io.Serializable;
@@ -22,18 +20,14 @@ public class Credito implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_credito")
+    @Column(name = "id_credito")
     private Long idCredito;
 
-    
-    
     public Credito() {
     }
 
     public Credito(Double limite) {
         this.limite = limite;
     }
-
-     
 
 }

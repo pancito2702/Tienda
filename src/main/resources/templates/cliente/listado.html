@@ -10,9 +10,10 @@
         <header th:replace="layout/plantilla :: header"> </header>
         <h1> Saludos </h1>
         <div class="contenido">
-
             <h2> Informacion de clientes: </h2>
             <a th:href="@{/cliente/nuevo}"> Nuevo Cliente </a>
+            <br/>
+            <a th:href="@{/cliente/busqueda}"> Buscar Cliente por Apellidos </a>
             <div th:if="${clientes != null and !clientes.empty}">
                 <table border="1">
                     <thead>
@@ -42,6 +43,7 @@
                 <h2>No hay clientes que mostrar</h2>
             </div>
         </div>
-        <footer th:replace="layout/plantilla :: footer"/>
-    </body>
+        <footer th:replace="layout/plantilla :: footer">
+        </footer>
+</body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -45,12 +46,23 @@ public class ClienteController {
         model.addAttribute("cliente", cliente);
         return "/cliente/modificar";
     }
-    
 
     @GetMapping("/cliente/eliminar/{idCliente}")
     public String eliminarrCliente(Cliente cliente) {
         ClienteService.delete(cliente);
         return "redirect:/cliente/listado";
+    }
+
+    @GetMapping("/cliente/busqueda")
+    public String buscarCliente() {
+        return "/cliente/busqueda";
+    }
+
+    @PostMapping("/cliente/modificar")
+    public String modificarClienteApellidos(@RequestParam("apellidos") String apellidos, Model model) {
+        List Cliente = ClienteService.buscarPorApellidos(apellidos);
+        model.addAllAttributes(Cliente);
+        return "/cliente/modificar";
     }
 
 }

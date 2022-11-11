@@ -18,13 +18,14 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_cliente")
+    @Column(name = "id_cliente")
     private Long idCliente;
 
-    @JoinColumn(name="id_credito", referencedColumnName="id_credito")
+    @JoinColumn(name = "id_credito", referencedColumnName = "id_credito")
     @ManyToOne
     private Credito Credito;
     
+ 
     public Cliente() {
     }
 
@@ -43,4 +44,3 @@ public class Cliente implements Serializable {
         this.Credito = Credito;
     }
 }
- 
