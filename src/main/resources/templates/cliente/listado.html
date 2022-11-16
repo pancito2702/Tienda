@@ -10,40 +10,40 @@
         <header th:replace="layout/plantilla :: header"> </header>
         <h1> Saludos </h1>
         <div class="contenido">
-            <h2> Informacion de clientes: </h2>
-            <a th:href="@{/cliente/nuevo}"> Nuevo Cliente </a>
+            <h2> [[#{cliente.titulo}]]</h2>
+            <a th:href="@{/cliente/nuevo}"> [[#{cliente.nuevo}]] </a>
             <br/>
             <a th:href="@{/cliente/busqueda}"> Buscar Cliente por Apellidos </a>
             <div th:if="${clientes != null and !clientes.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th> Nombre </th>
-                            <th> Apellidos </th>
-                            <th> Correo </th>
-                            <th> Credito </th>
-                            <th> Telefono </th>
-                            <th> Eliminar </th>
-                            <th> Modificar </th>
+                            <th> [[#{cliente.nombre}]] </th>
+                            <th> [[#{cliente.apellidos}]] </th>
+                            <th> [[#{cliente.correo}]] </th>
+                            <th> [[#{cliente.telefono}]] </th>
+                            <th> [[#{cliente.limite}]] </th>
+                            <th> [[#{accion.eliminar}]] </th>
+                            <th> [[#{accion.actualizar}]] </th>
                         </tr>
                     </thead>
                     <tr th:each="cliente : ${clientes}">
                         <td> [[${cliente.nombre}]]  </td>
                         <td> [[${cliente.apellidos}]] </td>
                         <td> [[${cliente.correo}]] </td>
-                        <td  style="text-align: right"> [[${#numbers.formatDecimal(cliente.credito.limite,3,2)}]] </td>
                         <td> [[${cliente.telefono}]]  </td>
-                        <td> <a th:href="@{/cliente/eliminar/}+ ${cliente.idCliente}"> Eliminar </a> </td>
-                        <td> <a th:href="@{/cliente/modificar/}+ ${cliente.idCliente}"> Modificar</a> </td>
+                        <td  style="text-align: right"> [[${#numbers.formatDecimal(cliente.credito.limite,3,2)}]] </td>
+                        <td> <a th:href="@{/cliente/eliminar/}+ ${cliente.idCliente}"> [[#{accion.eliminar}]]</a> </td>
+                        <td> <a th:href="@{/cliente/modificar/}+ ${cliente.idCliente}"> [[#{accion.actualizar}]] </a> </td>
                     </tr>
                 </table>
             </div>
 
             <div th:if="${clientes == null or clientes.empty}">
-                <h2>No hay clientes que mostrar</h2>
+                <h2> [[#{cliente.no_mostrar}]]</h2>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer">
         </footer>
-</body>
+    </body>
 </html>

@@ -11,16 +11,16 @@
         <h1> Saludos </h1>
         <div class="contenido">
 
-            <h2> Informacion de categorias: </h2>
-            <a th:href="@{/categoria/nuevo}"> Nuevo Categoria </a>
+            <h2> [[#{categoria.titulo}]] </h2>
+            <a th:href="@{/categoria/nuevo}"> [[#{categoria.nuevo}]] </a>
             <div th:if="${categorias != null and !categorias.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th> Descripcion </th>
-                            <th> Activa </th>
-                            <th> Eliminar </th>
-                            <th> Modificar </th>
+                            <th> [[#{categoria.descripcion}]] </th>
+                            <th> [[#{categoria.activo}]] </th>
+                            <th> [[#{accion.eliminar}]] </th>
+                            <th> [[#{accion.actualizar}]] </th>
                         </tr>
                     </thead>
                     <tr th:each="categoria : ${categorias}">
@@ -30,8 +30,8 @@
                                 th:checked="${categoria.activo}" 
                                 disabled="true"/> 
                         </td>
-                        <td> <a th:href="@{/categoria/eliminar/}+ ${categoria.idCategoria}"> Eliminar </a> </td>
-                        <td> <a th:href="@{/categoria/modificar/}+ ${categoria.idCategoria}"> Modificar</a> </td>
+                        <td> <a th:href="@{/categoria/eliminar/}+ ${categoria.idCategoria}"> [[#{accion.eliminar}]] </a> </td>
+                        <td> <a th:href="@{/categoria/modificar/}+ ${categoria.idCategoria}"> [[#{accion.actualizar}]] </a> </td>
                     </tr>
                 </table>
             </div>
