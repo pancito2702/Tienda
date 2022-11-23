@@ -2,10 +2,9 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"> 
-    <head>
+
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-        <link href="/css/Menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"> </header>
@@ -16,7 +15,7 @@
             <form th:action="@{/cliente/guardar}" method="post" th:object="${cliente}">
 
 
-                 <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
+                <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
 
 
                 <label for="nombre"> [[#{cliente.nombre}]]  </label>

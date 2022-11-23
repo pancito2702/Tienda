@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org"> 
-    <head>
+
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-         <link href="/css/Menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"> </header>
-        <h1> Saludos </h1>
         <div class="contenido">
 
             <h2> [[#{categoria.titulo}]] </h2>
-            <a th:href="@{/categoria/nuevo}"> [[#{categoria.nuevo}]] </a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categoria/nuevo}"> [[#{categoria.nuevo}]] </a>
             <div th:if="${categorias != null and !categorias.empty}">
                 <table border="1">
                     <thead>
                         <tr>
                             <th> [[#{categoria.descripcion}]] </th>
                             <th> [[#{categoria.activo}]] </th>
-                            <th> [[#{accion.eliminar}]] </th>
-                            <th> [[#{accion.actualizar}]] </th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')"> [[#{accion.eliminar}]] </th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')"> [[#{accion.actualizar}]] </th>
                         </tr>
                     </thead>
                     <tr th:each="categoria : ${categorias}">
@@ -30,8 +28,8 @@
                                 th:checked="${categoria.activo}" 
                                 disabled="true"/> 
                         </td>
-                        <td> <a th:href="@{/categoria/eliminar/}+ ${categoria.idCategoria}"> [[#{accion.eliminar}]] </a> </td>
-                        <td> <a th:href="@{/categoria/modificar/}+ ${categoria.idCategoria}"> [[#{accion.actualizar}]] </a> </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/categoria/eliminar/}+ ${categoria.idCategoria}"> [[#{accion.eliminar}]] </a> </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/categoria/modificar/}+ ${categoria.idCategoria}"> [[#{accion.actualizar}]] </a> </td>
                     </tr>
                 </table>
             </div>

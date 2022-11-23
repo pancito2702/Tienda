@@ -6,30 +6,30 @@
     <head th:fragment="head">
         <title>TechShop</title>
         <meta charset="UTF-8">
-            <link rel="stylesheet" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"*>
-                <link rel="stylesheet" th:href="@{webjars/font-awesome/css/all.css}"*>
-                    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-                    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-                    <script th:src="@{/webjars/bootstrap/js/bootstrap/bootstrap.min.js}"></script>
-                    </head>
-                    <body>
-                        <header th:fragment="header" class="header">
-                            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-                                <div class="container">
-                                    <a class="navbar-brand" th:href="@{/}">TechShop</a>
-                                    <button class="navbar-toggler" 
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"*>
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"*>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap/bootstrap.min.js}"></script>
+     </head>
+            <body>
+                  <header th:fragment="header" class="header">
+                  <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+                  <div class="container">
+                        <a class="navbar-brand" th:href="@{/}">TechShop</a>
+                        <button class="navbar-toggler" 
                                             data-tiggle="collapse" 
                                             data-targe="#navbarCollapse">
                                         <span class="nav-toggler-icon">  </span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                                        <ul class="navbar-nav">
+                                        <ul class="navbar-nav" sec:authorize="hasRole('ROLE_VENDEDOR')">
                                             <li class="nav-item px-2"> <a class="nav-menu-link nav-link" th:href="@{/articulo/listado}" th:text="#{plantilla.articulos}">  </a>  </li>
                                             <li class="nav-item px-2"> <a class="nav-menu-link nav-link" th:href="@{/cliente/listado}" th:text="#{plantilla.clientes}">  </a>  </li>
                                             <li class="nav-item px-2"> <a class="nav-menu-link nav-link" th:href="@{/categoria/listado}" th:text="#{plantilla.categorias}">  </a> </li>
-                                            <li class="nav-item px-2"> <a class="nav-menu-link nav-link" th:href="@{/usuario/listado}" th:text="#{plantilla.usuarios}">  </a> </li>
+                                            <li class="nav-item px-2" sec:authorize="hasRole('ROLE_ADMIN')"> <a class="nav-menu-link nav-link" th:href="@{/usuario/listado}" th:text="#{plantilla.usuarios}">  </a> </li>
                                         </ul>
-                                        <ul class="navbar-nav ml-auto">
+                                        <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
                                             <li class="nav-item mr-3"> 
                                                 <a class="nav-link" href="#">
                                                     <i class="fas fa-user"> </i> 
@@ -47,12 +47,27 @@
                                     </div>
                                 </div>
                             </nav>  
-                        </header>        
-                        <footer th:fragment="footer" class="footer">
-                            <p> &COPY; [[#{plantilla.derechos}]] |
-                                <a th:href="@{/(lang=es)}"> ES </a> | 
-                                <a th:href="@{/(lang=en)}"> EN </a>
-                            </p>
-                        </footer>
-                    </body>
-                    </html>
+                            <section id="main-header" class="py-2 bg-success text-white">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h1>
+                                                <i class="fas fa-cog"> </i> [[#{plantilla.titulo}]]
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                        </section>
+               </header>        
+               <footer th:fragment="footer" class="bg-info text-white mt-5 py-2">
+                        <div class="container">
+                            <div class="col">
+                                <p class="lead text-center"> &COPY; [[#{plantilla.derechos}]] |
+                                    <a th:href="@{/(lang=es)}"> ES </a> | 
+                                    <a th:href="@{/(lang=en)}"> EN </a>
+                                </p>
+                            </div>
+                        </div>
+               </footer>
+        </body>
+ </html>

@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"> 
-    <head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/extras/spring-security"> 
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-        <link href="/css/Menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"> </header>
-        <h1> Saludos </h1>
         <div class="contenido">
             <h2> [[#{cliente.titulo}]]</h2>
-            <a th:href="@{/cliente/nuevo}"> [[#{cliente.nuevo}]] </a>
-            <br/>
-            <a th:href="@{/cliente/busqueda}"> Buscar Cliente por Apellidos </a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/cliente/nuevo}"> [[#{cliente.nuevo}]] </a>
+            <br sec:authorize="hasRole('ROLE_ADMIN')"/>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/cliente/busqueda}"> Buscar Cliente por Apellidos </a>
             <div th:if="${clientes != null and !clientes.empty}">
                 <table border="1">
                     <thead>
@@ -23,8 +21,8 @@
                             <th> [[#{cliente.correo}]] </th>
                             <th> [[#{cliente.telefono}]] </th>
                             <th> [[#{cliente.limite}]] </th>
-                            <th> [[#{accion.eliminar}]] </th>
-                            <th> [[#{accion.actualizar}]] </th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')"> [[#{accion.eliminar}]] </th>
+                            <th sec:authorize="hasRole('ROLE_ADMIN')"> [[#{accion.actualizar}]] </th>
                         </tr>
                     </thead>
                     <tr th:each="cliente : ${clientes}">
@@ -33,8 +31,8 @@
                         <td> [[${cliente.correo}]] </td>
                         <td> [[${cliente.telefono}]]  </td>
                         <td  style="text-align: right"> [[${#numbers.formatDecimal(cliente.credito.limite,3,2)}]] </td>
-                        <td> <a th:href="@{/cliente/eliminar/}+ ${cliente.idCliente}"> [[#{accion.eliminar}]]</a> </td>
-                        <td> <a th:href="@{/cliente/modificar/}+ ${cliente.idCliente}"> [[#{accion.actualizar}]] </a> </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')" > <a th:href="@{/cliente/eliminar/}+ ${cliente.idCliente}"> [[#{accion.eliminar}]]</a> </td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')" > <a th:href="@{/cliente/modificar/}+ ${cliente.idCliente}"> [[#{accion.actualizar}]] </a> </td>
                     </tr>
                 </table>
             </div>
