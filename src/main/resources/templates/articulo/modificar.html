@@ -6,49 +6,9 @@
         <title>TechShop</title>
     </head>
     <body>
-        <header th:replace="layout/plantilla :: header"> </header>
-        <div class="contenido">
-            <h1> [[#{articulo.datos}]] </h1>
-            <a th:href="@{/articulo/listado}"> [[#{accion.regresar}]] </a>
-            <hr/>
-            <form th:action="@{/articulo/guardar}" method="post" th:object="${articulo}">
+        <header th:replace="layout/plantilla :: header"/>
+        <section th:replace="articulo/fragmentosArticulo :: editarArticulo"/> 
 
-
-                <input type="hidden" name="idArticulo" th:field="*{idArticulo}"/>
-                <label for="categoria"> Categoria </label>
-                <select th:field="*{idCategoria}">
-                    <option th:each="categoria: ${categorias}"
-                            th:value="${categoria.idCategoria}"
-                            th:text="${categoria.descripcion}"/>
-                </select>
-                <br/>
-                <label for="descripcion">  [[#{articulo.descripcion}]] </label>
-                <input type="text" name="Descripcion" th:field="*{descripcion}"/>
-                <br/>
-
-
-
-                <label for="detalle">   [[#{articulo.detalle}]] </label>
-                <textarea name="detalle" th:field="*{detalle}" rows="6" cols="50"/>
-                <br/>
-
-
-                <label for="precio"> [[#{articulo.precio}]] </label>
-                <input type="number" name="precio" th:field="*{precio}"/>
-                <br/>
-
-
-                <label for="existencias"> [[#{articulo.existencias}]] </label>
-                <input type="number" name="existencias" th:field="*{existencias}"/>
-                <br/>
-
-                <label for="activo"> [[#{articulo.activo}]] </label>
-                <input type="checkbox" name="activo" th:field="*{activo}"/>
-                <br/>
-                <input type="submit" name="guardar" value="Guardar"/>
-            </form>
-        </div>
-        <footer th:replace="layout/plantilla :: footer">
-        </footer>
+        <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>

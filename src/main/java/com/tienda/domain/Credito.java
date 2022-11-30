@@ -14,7 +14,7 @@ import lombok.Data;
 @Table(name = "credito")
 public class Credito implements Serializable {
 
-    private double limite;
+    public double limite;
 
     private static final long serialVersionUID = 1L;
 

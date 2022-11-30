@@ -6,18 +6,18 @@
     <head th:fragment="head">
         <title>TechShop</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"*>
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"*>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap/bootstrap.min.js}"></script>
-     </head>
-            <body>
-                  <header th:fragment="header" class="header">
-                  <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
-                  <div class="container">
-                        <a class="navbar-brand" th:href="@{/}">TechShop</a>
-                        <button class="navbar-toggler" 
+            <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"*>
+                <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"*>
+                    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+                    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+                    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+                    </head>
+                    <body>
+                        <header th:fragment="header" class="header">
+                            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+                                <div class="container">
+                                    <a class="navbar-brand" th:href="@{/}">TechShop</a>
+                                    <button class="navbar-toggler" 
                                             data-tiggle="collapse" 
                                             data-targe="#navbarCollapse">
                                         <span class="nav-toggler-icon">  </span>
@@ -43,6 +43,17 @@
                                                     </a>
                                                 </form>
                                             </li>
+
+
+                                        </ul>
+                                        <ul class="navbar-nav ml-auto" sec:authorize="!isAuthenticated()">
+                                        <li class="nav-item mr-3"> 
+                                            <form method="post" th:action="@{/login}">
+                                                <a href="#" onclick="this.parentNode.submit()" class="nav-link">
+                                                    <i class="fas fa-user-times"> </i> [[#{login.login}]]
+                                                </a>
+                                            </form>
+                                        </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -57,17 +68,17 @@
                                         </div>
                                     </div>
                                 </div>
-                        </section>
-               </header>        
-               <footer th:fragment="footer" class="bg-info text-white mt-5 py-2">
-                        <div class="container">
-                            <div class="col">
-                                <p class="lead text-center"> &COPY; [[#{plantilla.derechos}]] |
-                                    <a th:href="@{/(lang=es)}"> ES </a> | 
-                                    <a th:href="@{/(lang=en)}"> EN </a>
-                                </p>
+                            </section>
+                        </header>        
+                        <footer th:fragment="footer" class="bg-info text-white mt-5 py-2">
+                            <div class="container">
+                                <div class="col">
+                                    <p class="lead text-center"> &COPY; [[#{plantilla.derechos}]] |
+                                        <a th:href="@{/(lang=es)}"> ES </a> | 
+                                        <a th:href="@{/(lang=en)}"> EN </a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-               </footer>
-        </body>
- </html>
+                        </footer>
+                    </body>
+                    </html>

@@ -1,18 +1,26 @@
 package com.tienda;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    
+    @Autowired
+    private UserDetailsService userDetailService;
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("juan").
+        
+        //Autenticacion en Memoria
+        /* auth.inMemoryAuthentication().withUser("juan").
                 password("{noop}123")
                 .roles("ADMIN", "VENDEDOR", "USER")
                 .and()
@@ -22,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().withUser("pedro")
                 .password("{noop}789")
                 .roles("USER");
+         */
+        auth.userDetailsService(userDetailService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -43,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/usuario/modificar/**",
                 "/usuario/eliminar/*").hasRole("ADMIN").antMatchers("/articulo/listado",
                 "/categoria/listado", "/cliente/listado").hasAnyRole("ADMIN","VENDEDOR")
-                .antMatchers("/").hasAnyRole("ADMIN", "VENDEDOR", "USER")
+                .antMatchers("/").permitAll()
                 .and().formLogin().loginPage("/login").and().exceptionHandling().accessDeniedPage("/errores/403");
     }
 

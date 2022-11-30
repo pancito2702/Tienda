@@ -1,8 +1,8 @@
 package com.tienda.controller;
 
-import com.tienda.domain.Articulo;
 import com.tienda.services.ArticuloService;
 import com.tienda.services.CategoriaService;
+import com.tienda.domain.Articulo;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,23 @@ public class ArticuloController {
     @GetMapping("/articulo/listado")
     public String listado(Model model) {
 
-        List articulos = articuloService.getArticulos(false);
+        List<Articulo> articulos = articuloService.getArticulos(false);
+        List categorias = categoriaService.getCategorias(true);
+        double total = 0;
+        for (Articulo a : articulos) {
+            total += a.getPrecio() * a.getExistencias();
+        }
 
+        model.addAttribute("total", total);
         model.addAttribute("articulos", articulos);
-
+        model.addAttribute("totalArticulos", articulos.size());
+        model.addAttribute("articulo", new Articulo());
+        model.addAttribute("categorias", categorias);
         return "/articulo/listado";
     }
 
     @GetMapping("/articulo/nuevo")
     public String nuevoArticulo(Model model, Articulo Articulo) {
-        List categorias = categoriaService.getCategorias(true);
-        model.addAttribute("categorias", categorias);
         return "/articulo/modificar";
     }
 
