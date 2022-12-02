@@ -53,7 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/usuario/modificar/**",
                 "/usuario/eliminar/*").hasRole("ADMIN").antMatchers("/articulo/listado",
                 "/categoria/listado", "/cliente/listado").hasAnyRole("ADMIN","VENDEDOR")
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "carrito/**").permitAll()
+                .antMatchers("/facturar/carrtio").authenticated()
                 .and().formLogin().loginPage("/login").and().exceptionHandling().accessDeniedPage("/errores/403");
     }
 

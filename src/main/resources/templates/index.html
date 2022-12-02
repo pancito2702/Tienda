@@ -1,30 +1,21 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"> 
-    <head th:replace="layout/plantilla :: head">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">   
+    <head th:replace="layout/plantilla :: head">        
         <title>TechShop</title>
-
     </head>
     <body>
-        <header th:replace="layout/plantilla :: header"> </header>
-        <div class="container">
-            <h2> [[#{index.titulo}]] </h2>
-            <div class="row row-cols-3" th:if="${articulos != null and !articulos.empty}">
-
-                <div class="card" th:each="articulo : ${articulos}">
-                    <div class="card-body">
-                        <h5 class="card-title"> [[${articulo.descripcion}]]  </h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-end">  [[${#numbers.formatDecimal(articulo.precio, 2, 3)}]] </h6>
-                        <a class="card-link" th:href="@{/carrito/agregar/} + ${articulo.idArticulo}"> [[#{accion.agregar}]] </a> 
-                        <p class="card-text"> [[${articulo.detalle}]] </p>
-                    </div>
-                </div>
-            </div>
-            <div th:if="${articulos == null or articulos.empty}">
-                <h2> [[#{articulo.no_mostrar}]]</h2>
-            </div>
-        </div>
-        <footer th:replace="layout/plantilla :: footer">
-        </footer>
+        <header th:replace="layout/plantilla :: header"/>
+        <section th:replace="carrito/fragmentosCarrito :: listadoArticulos"/>
+        <footer th:replace="layout/plantilla :: footer"/>
+        <script>
+            function addCard(formulario) {
+                var valor = formulario.elements[0].value;
+                var url = '/carrito/agregar';
+                url = url + '/' +valor;
+                $("#resultsBlock").load(url);
+            }
+        </script>
     </body>
 </html>

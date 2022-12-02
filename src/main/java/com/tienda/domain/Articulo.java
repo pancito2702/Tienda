@@ -23,19 +23,23 @@ public class Articulo implements Serializable {
     private double precio;
     private int existencias;
     private boolean activo;
-
+    @Column(name="ruta_imagen")
+    private String rutaImagen;
     
     public Articulo() {
     }
 
-    public Articulo(Long idCategoria, String descripcion, String detalle, double precio, int existencias, boolean activo) {
+    public Articulo(Long idCategoria, String descripcion, String detalle, double precio, int existencias, boolean activo, String rutaImagen) {
         this.idCategoria = idCategoria;
         this.descripcion = descripcion;
         this.detalle = detalle;
         this.precio = precio;
         this.existencias = existencias;
         this.activo = activo;
+        this.rutaImagen = rutaImagen;
     }
+
+    
 
     
     

@@ -140,6 +140,11 @@
                                     <label for="activo" th:text="#{articulo.existencias}"></label>
                                     <input type="number" class="form-control" name="existencias" required="true">
                                 </div>
+                                <div class="form-group">
+                                    <label for="rutaImagen"> Ruta Imagen: </label>
+                                    <input type="text" class="form-control" name="rutaImagen" required="true">
+                                </div>
+
 
                                 <div class="form-group">
                                     <label for="activo" th:text="#{articulo.activo}"></label>
@@ -201,6 +206,11 @@
                                             <div class="form-group">
                                                 <label for="activo" th:text="#{articulo.existencias}"></label>
                                                 <input type="number" class="form-control" name="existencias" required="true" th:field="*{existencias}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="rutaImagen"> Ruta Imagen: </label>
+                                                <input type="text" class="form-control" name="rutaImagen" required="true" th:field="*{rutaImagen}">
                                             </div>
 
                                             <div class="form-group">
